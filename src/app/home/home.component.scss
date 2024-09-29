@@ -1,0 +1,21 @@
+
+ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    top: 0px;
+    position: static;
+    padding: 0px;
+}
+li {
+    list-style: none;
+    font-size: 20px;
+    padding: 10px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.is-active {
+    background-color: rgb(239, 192, 192);
+}

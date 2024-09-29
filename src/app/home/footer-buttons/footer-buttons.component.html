@@ -1,0 +1,12 @@
+<div class="footer-buttons">
+    <button mat-raised-button color="primary" [disabled]="showPrevious" (click)="onClick('previous')">Previous</button>
+    <mat-form-field appearance="outline">
+      <mat-label>Select limit</mat-label>
+      <mat-select [(ngModel)]="pageLimit" name="food" (selectionChange)="selectLimit($event, pageLimit)">
+        @for (limit of usersLimit; track limit) {
+          <mat-option [value]="limit">{{limit}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="onClick('next')">Next</button>
+  </div>

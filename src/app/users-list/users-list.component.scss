@@ -1,0 +1,62 @@
+.usersList {
+    margin: 0px 50px;
+}
+.example-container {
+    width: auto;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid #555;
+    /* The background property is added to clearly distinguish the borders between drawer and main
+       content */
+    background: #eee;
+  }
+  ::ng-deep.mat-grid-tile-content {
+    width: 75%;
+  }
+  td, th {
+    border: 1px solid grey;
+  }
+mat-icon {
+    position: absolute;
+    top: 19;
+}
+.view-button:active,
+    .view-button:focus {
+      border: 2px solid grey;
+}
+
+.display-table {
+  display: block;
+  display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+}
+.display-names {
+  display: none;
+}
+::ng-deep.mat-grid-tile-content {
+  display: block !important;
+}
+/* On screens that are 992px wide or less, the background color is blue */
+@media screen and (max-width: 992px) {
+  .display-table {
+    display: none;
+  }
+  .display-names {
+    display: block;
+  }
+  .mat-expansion-panel {
+    margin: 10px 0px;
+  }
+}
+
+/* On screens that are 600px wide or less, the background color is olive */
+@media screen and (max-width: 600px) {
+  .display-table {
+    display: none;
+  }
+  .display-names {
+    display: block;
+  }
+}

@@ -1,0 +1,85 @@
+
+<app-spinner *ngIf="(isLoading$ | async) || !usersList; else showUsersList"></app-spinner>
+<ng-template #showUsersList>
+
+  
+
+  <div class="usersList">
+    <div style="text-align: center;">
+      <mat-form-field class="example-full-width">
+        <mat-label>Enter Id</mat-label>
+        <input matInput placeholder="Enter Id" [(ngModel)]="userId">
+      </mat-form-field>
+      <button (click)="onSearchUserId()" style="margin:0px 10px" mat-raised-button color="primary">Search</button>
+      <button (click)="onClear()" mat-raised-button >Clear</button>
+    </div>
+    
+  
+    <div class="display-table">
+      <div>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id 
+              <mat-icon *ngIf="!asecOrder" (click)="sort('asec')">arrow_downward</mat-icon>
+              <mat-icon *ngIf="asecOrder" (click)="sort('desc')">arrow_upward</mat-icon> </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+          <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef> User Name 
+              <mat-icon *ngIf="!sortAlphabetically" (click)="sortByName('alphabetic')">arrow_downward</mat-icon>
+              <mat-icon *ngIf="sortAlphabetically" (click)="sortByName('')">arrow_upward</mat-icon>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="viewButton">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-stroked-button color="primary" class="view-button" (click)="viewUserData(element)">View</button> </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>                 
+        </table>
+        <footer>
+          <app-footer-buttons [showPrevious]="showPrevious"
+                              [showNext]="showNext"
+                              [currentPage]="currentPage"
+                              [pageLimit]="limit"
+                              (getNewData)="getLimit($event)"></app-footer-buttons>
+         </footer>
+      </div>
+
+      <div>
+        <app-user-card [selectedUseData]="selectedUseData"></app-user-card>
+      </div>
+    </div>
+
+    
+<!-- Mobile view-->
+      <div class="display-names">
+        <button mat-stroked-button color="primary" class="text-center" style="text-align: center;margin: 10px 0px">Sort
+          <mat-icon *ngIf="!sortAlphabetically" (click)="sortByName('alphabetic')">arrow_downward</mat-icon>
+          <mat-icon *ngIf="sortAlphabetically" (click)="sortByName('')">arrow_upward</mat-icon>
+        </button>
+        <mat-accordion *ngFor="let user of usersList">
+          <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{user.name}} </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>Id: {{user.id}}</p>
+            <p>Gender: {{user.gender}}</p>
+            <p>Status: {{user.status}}</p>
+            <p>Email: {{user.email}}</p>
+          </mat-expansion-panel>
+        </mat-accordion> 
+        <footer>
+          <app-footer-buttons [showPrevious]="showPrevious"
+                              [showNext]="showNext"
+                              [currentPage]="currentPage"
+                              [pageLimit]="limit"
+                              (getNewData)="getLimit($event)"></app-footer-buttons>
+        </footer>       
+      </div>
+    
+</div>
+</ng-template>
